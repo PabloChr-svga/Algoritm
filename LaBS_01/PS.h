@@ -8,3 +8,10 @@ struct TspData {
     int matrix[MAX_CITIES][MAX_CITIES]; // Матрица стоимостей (расстояний)
     int cityCount;                      // Текущее количество городов в эксперименте
 };
+
+void generateRandomMatrix(TspData& data, int count, int minCost, int maxCost);
+
+// Функция запуска точного решения методом полного перебора
+long long solveTspExact(const TspData& data, int startCity, int* bestPath);
+
+#endif // PROJECT_H
