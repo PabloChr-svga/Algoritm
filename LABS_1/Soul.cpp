@@ -120,3 +120,18 @@ bool solveNearestNeighbor(TspSolver& solver, int startCity) {
     solver.heuristicCost = totalCost;
     return true;
 }
+
+int getBestPathCity(const TspSolver& solver, int index) {
+    if (index < 0 || index >= solver.cityCount) return -1;
+    return solver.bestPath[index];
+}
+
+int getWorstPathCity(const TspSolver& solver, int index) {
+    if (index < 0 || index >= solver.cityCount) return -1;
+    return solver.worstPath[index];
+}
+
+int getHeuristicPathCity(const TspSolver& solver, int index) {
+    if (index < 0 || index >= solver.cityCount) return -1;
+    return solver.heuristicPath[index];
+}
