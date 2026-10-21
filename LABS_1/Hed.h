@@ -4,7 +4,7 @@
 // Максимальное количество городов в эксперименте
 const int MAX_CITIES = 10;
 
-// Структура для хранения параметров графа задачи коммивояжера
+
 struct TspSolver {
     int costMatrix[MAX_CITIES][MAX_CITIES];
     int currentPath[MAX_CITIES];
@@ -20,4 +20,9 @@ struct TspSolver {
     long long routesChecked;
 };
 
+// Функция инициализации начальных параметров структуры
+void initSolver(TspSolver& solver);
+
+
+bool generateRandomMatrix(TspSolver& solver, int cityCount, int minCost, int maxCost);
 
