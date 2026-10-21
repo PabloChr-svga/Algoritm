@@ -14,3 +14,9 @@ void printRoute(const TspSolver& solver, int routeType) {
         else city = getHeuristicPathCity(solver, i);
         cout << city << " ";
     }
+    int startCity = 0;
+    if (routeType == 1) startCity = getBestPathCity(solver, 0);
+    else if (routeType == 2) startCity = getWorstPathCity(solver, 0);
+    else startCity = getHeuristicPathCity(solver, 0);
+    cout << startCity;
+}
