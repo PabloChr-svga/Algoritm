@@ -87,3 +87,8 @@ void runExperiment(int cityCount, int experimentNumber) {
     cout << " СРАВНЕНИЕ ТОЧНОГО И ЭВРИСТИЧЕСКОГО\n";
     cout << " МЕТОДОВ РЕШЕНИЯ ЗАДАЧИ КОММИВОЯЖЕРА\n";
     cout << "========================================\n";
+
+    const int cityCounts[] = { 4, 6, 8, 10 };
+    const int numberOfSizes = 4;
+    const int experimentsPerSize = 4;
+
