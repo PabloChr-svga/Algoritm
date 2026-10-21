@@ -79,3 +79,11 @@ void runExperiment(int cityCount, int experimentNumber) {
     cout.precision(2);
     cout << "Качество решения: " << quality << "%\n";
 }
+    int main() {
+    setlocale(LC_ALL, "Russian");
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+    cout << "========================================\n";
+    cout << " СРАВНЕНИЕ ТОЧНОГО И ЭВРИСТИЧЕСКОГО\n";
+    cout << " МЕТОДОВ РЕШЕНИЯ ЗАДАЧИ КОММИВОЯЖЕРА\n";
+    cout << "========================================\n";
