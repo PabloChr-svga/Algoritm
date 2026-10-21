@@ -80,7 +80,7 @@ void runExperiment(int cityCount, int experimentNumber) {
     cout << "Качество решения: " << quality << "%\n";
 }
     int main() {
-    setlocale(LC_ALL, "Russian");
+    setlocale(LC_ALL, ".UTF-8");
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
     cout << "========================================\n";
@@ -91,4 +91,14 @@ void runExperiment(int cityCount, int experimentNumber) {
     const int cityCounts[] = { 4, 6, 8, 10 };
     const int numberOfSizes = 4;
     const int experimentsPerSize = 4;
+
+    for (int i = 0; i < numberOfSizes; i++) {
+        for (int experiment = 1; experiment <= experimentsPerSize; experiment++) {
+            runExperiment(cityCounts[i], experiment);
+        }
+    }
+
+    return 0;
+    }
+
 
