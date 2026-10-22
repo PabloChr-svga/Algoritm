@@ -25,4 +25,13 @@ struct TspSolver {
 void initSolver(TspSolver& solver);
 bool generateRandomMatrix(TspSolver& solver, int cityCount, int minCost, int maxCost);
 
+bool solveExact(TspSolver& solver, int startCity);
+void searchRoutes(TspSolver& solver, int currentCity, int depth, long long currentCost);
+bool solveNearestNeighbor(TspSolver& solver, int startCity);
+
+// Прототипы функций безопасного чтения элементов пути
+int getBestPathCity(const TspSolver& solver, int index);
+int getWorstPathCity(const TspSolver& solver, int index);
+int getHeuristicPathCity(const TspSolver& solver, int index);
+
 #endif // OBJECT_H
