@@ -86,5 +86,17 @@ void runExperiment(int cityCount, int experimentNumber) {
         cout << "Ошибка эвристического решения.\n";
         return;
     }
-    double heuristicTime = duration<double, std::milli>(heuristicEnd - heuristicStart).count();
+     double heuristicTime = duration<double, std::milli>(heuristicEnd - heuristicStart).count();
+    
+    
+     double quality;
+    if (solver.worstCost == solver.bestCost) {
+        quality = 100.0;
+    }
+    else {
+        quality = 100.0 * (solver.worstCost - solver.heuristicCost) / (solver.worstCost - solver.bestCost);
+    }
+
+    cout << fixed << setprecision(3);
+
 
