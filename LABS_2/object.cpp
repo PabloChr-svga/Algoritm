@@ -24,7 +24,7 @@ void initSolver(TspSolver& solver) {
     }
 }
 
-// Заполнение матрицы случайными стоимостями путей по стандарту C++11
+
 bool generateRandomMatrix(TspSolver& solver, int cityCount, int minCost, int maxCost) {
     if (cityCount < 2 || cityCount > MAX_CITIES || minCost < 1 || maxCost < minCost) {
         return false;
@@ -32,7 +32,7 @@ bool generateRandomMatrix(TspSolver& solver, int cityCount, int minCost, int max
 
     solver.cityCount = cityCount;
 
-    // Использование современного генератора mt19937 и равномерного распределения
+    
     static std::mt19937 generator(static_cast<unsigned int>(std::time(nullptr)));
     std::uniform_int_distribution<int> distribution(minCost, maxCost);
 
@@ -155,3 +155,19 @@ void searchRoutes(TspSolver& solver, int currentCity, int depth, long long curre
         }
     }
 }
+
+
+    int getBestPathCity(const TspSolver& solver, int index) {
+    if (index < 0 || index >= solver.cityCount) return -1;
+    return solver.bestPath[index];
+    }
+
+    int getWorstPathCity(const TspSolver& solver, int index) {
+    if (index < 0 || index >= solver.cityCount) return -1;
+    return solver.worstPath[index];
+    }
+
+    int getHeuristicPathCity(const TspSolver& solver, int index) {
+    if (index < 0 || index >= solver.cityCount) return -1;
+    return solver.heuristicPath[index];
+    }
