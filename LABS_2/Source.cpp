@@ -99,4 +99,26 @@ void runExperiment(int cityCount, int experimentNumber) {
 
     cout << fixed << setprecision(3);
 
+    cout << "\nТочное решение:\n";
+    cout << "Лучший маршрут: ";
+    printRoute(solver, 1);
+    cout << "\nСтоимость: " << solver.bestCost << "\n";
+
+    cout << "Худший маршрут: ";
+    printRoute(solver, 2);
+    cout << "\nСтоимость: " << solver.worstCost << "\n";
+
+    cout << "Проверено маршрутов: " << solver.routesChecked << "\n";
+    cout << "Время точного алгоритма: " << exactTime << " мс\n";
+
+    cout << "\nЭвристическое решение:\n";
+    cout << "Маршрут: ";
+    printRoute(solver, 3);
+    cout << "\nСтоимость: " << solver.heuristicCost << "\n";
+    cout << "Время эвристики: " << heuristicTime << " мс\n";
+
+    cout << "Качество решения: " << setprecision(2) << quality << "%\n";
+}
+
+
 
