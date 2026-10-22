@@ -25,3 +25,21 @@ void printRoute(const TspSolver& solver, int routeType) {
     else startCity = getHeuristicPathCity(solver, 0);
     cout << startCity;
 }
+
+void runExperiment(int cityCount, int experimentNumber) {
+    TspSolver solver;
+    initSolver(solver);
+
+    const int startCity = 0;
+    const int minCost = 1;
+    const int maxCost = 50; // Диапазон стоимостей из задания
+
+    cout << "\n----------------------------------------\n";
+    cout << "Размер матрицы: " << cityCount << " x " << cityCount << "\n";
+    cout << "Эксперимент №: " << experimentNumber << "\n";
+    cout << "Диапазон стоимостей: " << minCost << "-" << maxCost << "\n";
+
+    if (!generateRandomMatrix(solver, cityCount, minCost, maxCost)) {
+        cout << "Ошибка создания матрицы.\n";
+        return;
+    }
