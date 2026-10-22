@@ -48,3 +48,50 @@ bool generateRandomMatrix(TspSolver& solver, int cityCount, int minCost, int max
     }
     return true;
 }
+
+// Эвристическое решение методом ближайшего соседа
+bool solveNearestNeighbor(TspSolver& solver, int startCity) {
+    if (solver.cityCount < 2 || startCity < 0 || startCity >= solver.cityCount) {
+        return false;
+    }
+
+    solver.startCity = startCity;
+
+    for (int i = 0; i < solver.cityCount; i++) {
+        solver.visited[i] = false;
+        solver.heuristicPath[i] = -1;
+    }
+
+    int currentCity = solver.startCity;
+    long long totalCost = 0;
+
+    solver.heuristicPath[0] = solver.startCity;
+    solver.visited[solver.startCity] = true;
+
+    for (int step = 1; step < solver.cityCount; step++) {
+        int nearestCity = -1;
+        int nearestCost = INT_MAX;
+
+        for (int city = 0; city < solver.cityCount; city++) {
+            if (!solver.visited[city] && solver.costMatrix[currentCity][city] < nearestCost) {
+                nearestCost = solver.costMatrix[currentCity][city];
+                nearestCity = city;
+            }
+        }
+
+        if (nearestCity == -1) {
+            return false;
+        }
+
+        totalCost += nearestCost;
+        currentCity = nearestCity;
+
+        solver.heuristicPath[step] = currentCity;
+        solver.visited[currentCity] = true;
+    }
+
+    totalCost += solver.costMatrix[currentCity][solver.startCity];
+    solver.heuristicCost = totalCost;
+
+    return true;
+}
