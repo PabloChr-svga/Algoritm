@@ -43,3 +43,48 @@ void runExperiment(int cityCount, int experimentNumber) {
         cout << "Ошибка создания матрицы.\n";
         return;
     }
+
+    
+    auto exactStart = high_resolution_clock::now();
+    bool exactResult = solveExact(solver, startCity);
+    auto exactEnd = high_resolution_clock::now();
+
+    if (!exactResult) {
+        cout << "Ошибка точного решения.\n";
+        return;
+    }
+    double exactTime = duration<double, std::milli>(exactEnd - exactStart).count();
+
+    
+    auto heuristicStart = high_resolution_clock::now();
+    bool heuristicResult = solveNearestNeighbor(solver, startCity);
+    auto heuristicEnd = high_resolution_clock::now();
+
+    if (!heuristicResult) {
+        cout << "Ошибка эвристического решения.\n";
+        return;
+    }
+    double heuristicTime = duration<double, std::milli>(heuristicEnd - heuristicStart).count();
+    
+    
+    auto exactStart = high_resolution_clock::now();
+    bool exactResult = solveExact(solver, startCity);
+    auto exactEnd = high_resolution_clock::now();
+
+    if (!exactResult) {
+        cout << "Ошибка точного решения.\n";
+        return;
+    }
+    double exactTime = duration<double, std::milli>(exactEnd - exactStart).count();
+
+    
+    auto heuristicStart = high_resolution_clock::now();
+    bool heuristicResult = solveNearestNeighbor(solver, startCity);
+    auto heuristicEnd = high_resolution_clock::now();
+
+    if (!heuristicResult) {
+        cout << "Ошибка эвристического решения.\n";
+        return;
+    }
+    double heuristicTime = duration<double, std::milli>(heuristicEnd - heuristicStart).count();
+
