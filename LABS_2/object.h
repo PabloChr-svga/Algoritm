@@ -21,4 +21,8 @@ struct TspSolver {
     long long heuristicCost;
     long long routesChecked;
 };
+
+void initSolver(TspSolver& solver);
+bool generateRandomMatrix(TspSolver& solver, int cityCount, int minCost, int maxCost);
+
 #endif // OBJECT_H
