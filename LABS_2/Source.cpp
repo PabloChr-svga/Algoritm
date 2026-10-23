@@ -120,5 +120,25 @@ void runExperiment(int cityCount, int experimentNumber) {
     cout << "Качество решения: " << setprecision(2) << quality << "%\n";
 }
 
+int main() {
+    setlocale(LC_ALL, ".UTF-8");
+
+    const int cityCounts[] = { 4, 6, 8, 10 }; // 4 разные размерности матриц
+    const int numberOfSizes = 4;
+    const int experimentsPerSize = 4;      // 4 запуска на каждую размерность
+
+    cout << "==================================================\n";
+    cout << " СРАВНЕНИЕ ТОЧНОГО И ЭВРИСТИЧЕСКОГО МЕТОДОВ\n";
+    cout << "==================================================\n";
+
+    for (int i = 0; i < numberOfSizes; i++) {
+        for (int experiment = 1; experiment <= experimentsPerSize; experiment++) {
+            runExperiment(cityCounts[i], experiment);
+        }
+    }
+
+    return 0;
+}
+
 
 
