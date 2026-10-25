@@ -38,6 +38,7 @@ bool generateRandomMatrix(TspSolver& solver, int cityCount, int minCost, int max
     }
     return true;
 }
+
 bool solveExact(TspSolver& solver, int startCity) {
     if (solver.cityCount < 2 || startCity < 0 || startCity >= solver.cityCount) {
         return false;
