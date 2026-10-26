@@ -88,3 +88,51 @@ bool Date::isHoliday() const {
     if (month == 11 && day == 4) return true;             
     return false;
 }
+
+
+bool Date::operator==(const Date& other) const {
+    return (day == other.day && month == other.month && year == other.year);
+}
+
+// 9) Сколько дней осталось до нового года
+int Date::daysUntilNewYear() const {
+    int totalInYear = isLeapYear() ? 366 : 365;
+    return totalInYear - daysFromStartOfYear();
+}
+
+
+int calculateAbsoluteDays(const Date& d) {
+    int absDays = d.getDay();
+    for (int y = 1; y < d.getYear(); ++y) {
+        absDays += ((y % 4 == 0 && y % 100 != 0) || (y % 400 == 0)) ? 366 : 365;
+    }
+    for (int m = 1; m < d.getMonth(); ++m) {
+        if (m == 2) absDays += ((d.getYear() % 4 == 0 && d.getYear() % 100 != 0) || (d.getYear() % 400 == 0)) ? 29 : 28;
+        else if (m == 4 || m == 6 || m == 9 || m == 11) absDays += 30;
+        else absDays += 31;
+    }
+    return absDays;
+}
+
+// 10) Количество дней между двумя датами (перегрузка оператора -)
+int Date::operator-(const Date& other) const {
+    return calculateAbsoluteDays(*this) - calculateAbsoluteDays(other);
+}
+
+// 11) Сравнение с текущей датой (её параметры передаются в метод)
+std::string Date::compareWithCurrent(int curD, int curM, int curY) const {
+    Date current(curD, curM, curY);
+    int diff = calculateAbsoluteDays(*this) - calculateAbsoluteDays(current);
+    if (diff < 0) return "Прошлое";
+    if (diff > 0) return "Будущее";
+    return "Текущий день";
+}
+
+
+bool Date::isWithinRange(const Date& start, const Date& end) const {
+    int currentAbs = calculateAbsoluteDays(*this);
+    int startAbs = calculateAbsoluteDays(start);
+    int endAbs = calculateAbsoluteDays(end);
+    return (currentAbs >= startAbs && currentAbs <= endAbs);
+}
+
