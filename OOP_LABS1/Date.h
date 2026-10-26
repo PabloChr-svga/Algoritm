@@ -34,3 +34,15 @@ bool isLeapYear() const;
 int daysFromStartOfYear() const;
 
 bool isHoliday() const;
+
+bool operator==(const Date& other) const;
+
+int daysUntilNewYear() const;
+
+int operator-(const Date& other) const;
+
+std::string compareWithCurrent(int curD, int curM, int curY) const;
+
+bool isWithinRange(const Date& start, const Date& end) const;
+};
+
