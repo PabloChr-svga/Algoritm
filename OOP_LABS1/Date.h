@@ -8,7 +8,7 @@ private:
     int month;
     int year;
 
-    // Вспомогательные приватные методы для внутренней логики
+    
     bool isValidDate(int d, int m, int y) const;
     int daysInMonth(int m, int y) const;
 
@@ -22,7 +22,15 @@ public:
     int getYear() const { return year; }
     void setDate(int d, int m, int y);
 
-    // 2) Ввод/вывод даты
+    
     void print() const;
     void read();
 };
+
+std::string getSeason() const;
+
+bool isLeapYear() const;
+
+int daysFromStartOfYear() const;
+
+bool isHoliday() const;
