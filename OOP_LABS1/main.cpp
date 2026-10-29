@@ -1,5 +1,8 @@
+#pragma warning(disable : 4996)
 #include <iostream>
 #include "Date.h"
+
+
 
 int main() {
     // Включение поддержки русского языка в консоли Visual Studio
