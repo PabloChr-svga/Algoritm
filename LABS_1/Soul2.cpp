@@ -5,7 +5,7 @@
 
 using namespace std;
 
-// Вывод маршрута на экран с замыканием в стартовом городе
+ 
 void printRoute(const TspSolver& solver, int routeType) {
     int cityCount = solver.cityCount;
     for (int i = 0; i < cityCount; i++) {
@@ -22,13 +22,12 @@ void printRoute(const TspSolver& solver, int routeType) {
     cout << startCity;
 }
 
-void runExperiment(int cityCount, int experimentNumber) {
+ 
+void runExperiment(int cityCount, int experimentNumber, int minCost, int maxCost) {
     TspSolver solver;
     initSolver(solver);
 
     const int startCity = 0;
-    const int minCost = 1;
-    const int maxCost = 50;
 
     cout << "\n----------------------------------------\n";
     cout << "Размер матрицы: " << cityCount << " x " << cityCount << "\n";
@@ -40,7 +39,7 @@ void runExperiment(int cityCount, int experimentNumber) {
         return;
     }
 
-    // Измерение процессорного времени для точного решения
+     
     std::clock_t exactStart = std::clock();
     bool exactResult = solveExact(solver, startCity);
     std::clock_t exactEnd = std::clock();
@@ -51,7 +50,7 @@ void runExperiment(int cityCount, int experimentNumber) {
     }
     double exactTime = 1000.0 * (exactEnd - exactStart) / CLOCKS_PER_SEC;
 
-    // Измерение процессорного времени для эвристики
+     
     std::clock_t heuristicStart = std::clock();
     bool heuristicResult = solveNearestNeighbor(solver, startCity);
     std::clock_t heuristicEnd = std::clock();
@@ -62,11 +61,11 @@ void runExperiment(int cityCount, int experimentNumber) {
     }
     double heuristicTime = 1000.0 * (heuristicEnd - heuristicStart) / CLOCKS_PER_SEC;
 
-    // Вычисление относительного качества решения
+ 
     double quality = (solver.worstCost == solver.bestCost) ? 100.0 :
         100.0 * (solver.worstCost - solver.heuristicCost) / (solver.worstCost - solver.bestCost);
 
-    // Установка фиксированного формата без iomanip
+    
     cout.setf(ios::fixed, ios::floatfield);
     cout.precision(3);
 
@@ -86,15 +85,41 @@ void runExperiment(int cityCount, int experimentNumber) {
 int main() {
     setlocale(LC_ALL, ".UTF-8");
 
-    const int cityCounts[] = { 4, 6, 8, 10 }; // Четыре размерности матриц
-    const int numberOfSizes = 4;
-    const int experimentsPerSize = 4;        // Количество запусков на размерность
+    
+    std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
+    int minCost = 1;
+    int maxCost = 50;
+    int userCityCount = 4;
 
-    for (int i = 0; i < numberOfSizes; i++) {
-        for (int experiment = 1; experiment <= experimentsPerSize; experiment++) {
-            runExperiment(cityCounts[i], experiment);
+    cout << "=== Настройка параметров эксперимента ===\n";
+
+  
+    while (true) {
+        cout << "Введите минимальную стоимость (>= 1): ";
+        cin >> minCost;
+        cout << "Введите максимальную стоимость (до 80): ";
+        cin >> maxCost;
+
+        if (minCost >= 1 && maxCost <= 80 && maxCost >= minCost) {
+            break;
         }
+        cout << "Ошибка! Нарушены условия: 1 <= мин <= макс <= 80. Попробуйте снова.\n\n";
+    }
+ 
+    while (true) {
+        cout << "Введите количество городов для исследования (от 2 до 12): ";
+        cin >> userCityCount;
+
+        if (userCityCount >= 2 && userCityCount <= 12) {
+            break;
+        }
+        cout << "Ошибка! Количество городов должно быть строго в диапазоне от 2 до 12. Попробуйте снова.\n\n";
+    }
+ 
+    const int experimentsCount = 4;
+    for (int experiment = 1; experiment <= experimentsCount; experiment++) {
+        runExperiment(userCityCount, experiment, minCost, maxCost);
     }
 
     return 0;

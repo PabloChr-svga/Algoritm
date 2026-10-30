@@ -9,23 +9,30 @@ void initSolver(TspSolver& solver) {
     solver.worstCost = LLONG_MIN;
     solver.heuristicCost = 0;
     solver.routesChecked = 0;
-    for (int i = 0; i < MAX_CITIES; i++) {
-        solver.visited[i] = false;
-        solver.currentPath[i] = -1;
-        solver.bestPath[i] = -1;
-        solver.worstPath[i] = -1;
-        solver.heuristicPath[i] = -1;
-        for (int j = 0; j < MAX_CITIES; j++) {
-            solver.costMatrix[i][j] = 0;
-        }
-    }
+
+    
+    solver.costMatrix.clear();
+    solver.currentPath.clear();
+    solver.bestPath.clear();
+    solver.worstPath.clear();
+    solver.heuristicPath.clear();
+    solver.visited.clear();
 }
 
 bool generateRandomMatrix(TspSolver& solver, int cityCount, int minCost, int maxCost) {
-    if (cityCount < 2 || cityCount > MAX_CITIES || minCost < 1 || maxCost < minCost) {
+    if (cityCount < 2 || minCost < 1 || maxCost < minCost) { 
         return false;
     }
     solver.cityCount = cityCount;
+
+ 
+    solver.costMatrix.resize(cityCount, std::vector<int>(cityCount, 0));
+    solver.currentPath.resize(cityCount, -1);
+    solver.bestPath.resize(cityCount, -1);
+    solver.worstPath.resize(cityCount, -1);
+    solver.heuristicPath.resize(cityCount, -1);
+    solver.visited.resize(cityCount, false);
+
     for (int i = 0; i < solver.cityCount; i++) {
         for (int j = 0; j < solver.cityCount; j++) {
             if (i == j) {
@@ -136,3 +143,4 @@ int getHeuristicPathCity(const TspSolver& solver, int index) {
     if (index < 0 || index >= solver.cityCount) return -1;
     return solver.heuristicPath[index];
 }
+
