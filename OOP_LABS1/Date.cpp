@@ -119,14 +119,15 @@ int Date::operator-(const Date& other) const {
     return calculateAbsoluteDays(*this) - calculateAbsoluteDays(other);
 }
 
-// 11) Сравнение с текущей датой (её параметры передаются в метод)
+// 11) Сравнение с текущей датой
 std::string Date::compareWithCurrent(int curD, int curM, int curY) const {
-    Date current(curD, curM, curY);
-    int diff = calculateAbsoluteDays(*this) - calculateAbsoluteDays(current);
+    Date current(curD, curM, curY); // 1. Создает временный объект с датой 30.10.2026
+    int diff = calculateAbsoluteDays(*this) - calculateAbsoluteDays(current); // 2. Вычитает дни
     if (diff < 0) return "Прошлое";
     if (diff > 0) return "Будущее";
-    return "Текущий день";
+    return "Текущий день"; 
 }
+
 
 
 bool Date::isWithinRange(const Date& start, const Date& end) const {
