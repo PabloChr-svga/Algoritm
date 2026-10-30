@@ -90,9 +90,6 @@ int main() {
     const int numberOfSizes = 4;
     const int experimentsPerSize = 4;        // Количество запусков на размерность
 
-    cout << "==================================================\n";
-    cout << " СРАВНЕНИЕ ТОЧНОГО И ЭВРИСТИЧЕСКОГО МЕТОДОВ\n";
-    cout << "==================================================\n";
 
     for (int i = 0; i < numberOfSizes; i++) {
         for (int experiment = 1; experiment <= experimentsPerSize; experiment++) {
